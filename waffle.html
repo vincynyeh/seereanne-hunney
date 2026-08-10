@@ -81,7 +81,7 @@
             line-height: 1;
         }
 
-        /* Large Editorial Typography */
+        /* Restored Large Editorial Typography */
         h1 {
             font-family: 'Playfair Display', serif;
             font-weight: 500;
@@ -322,7 +322,7 @@
 
     <div class="card">
         <form id="birthdayForm">
-            <!-- YOUR ACCESS KEY IS CONNECTED BELOW -->
+            <!-- EMBEDDED WEB3FORMS ACCESS KEY -->
             <input type="hidden" name="access_key" value="961d37ce-261c-47d6-aad0-03986c6d8cd4">
             <input type="hidden" name="subject" value="New Birthday Response from BB Anne! 💕">
             <input type="hidden" name="selected_mood" id="hiddenMoodInput" value="Not specified">
@@ -369,7 +369,7 @@
             <!-- Screen 5: Destination -->
             <div class="screen" id="screen5">
                 <p class="subtitle">Since we are always planning the next trip but no one knows where to go...</p>
-                <img class="feature-img" src="https://i.ibb.co/xtvPMGGg/image.jpg" alt="Penang Trip" onerror="this.style.display='none'">
+                <img class="feature-img" src="https://i.ibb.co/ZpsthKKg/1.png" alt="Penang Trip" onerror="this.style.display='none'">
                 <h2>The next trip we are going to is Penang! 📍</h2>
                 <p class="small-note">cause it's easier</p>
                 <button type="button" class="btn-primary" onclick="goToScreen(6)">Next ✨</button>
@@ -392,7 +392,7 @@
                     </div>
                 </div>
 
-                <button type="button" class="btn-primary" onclick="goToScreen(7)">Confirm Dates 📅</button>
+                <button type="button" class="btn-primary" onclick="validateDatesAndProceed()">Confirm Dates 📅</button>
             </div>
 
             <!-- Screen 7: Mood & Memory -->
@@ -425,7 +425,7 @@
             <!-- Screen 9: Heart-to-Heart Part 2 -->
             <div class="screen" id="screen9">
                 <div class="emoji-top">🫂</div>
-                <h2>And I noticed we have been really getting 生疏 生到不行不行的 to each other</h2>
+                <h2>And I noticed we have been really getting stranger, idk why... to each other</h2>
                 <p class="subtitle">but I wan to keep this friendship alive.</p>
                 <button type="button" class="btn-primary" onclick="goToScreen(10)">Next ✨</button>
             </div>
@@ -433,9 +433,9 @@
             <!-- Screen 10: Heart-to-Heart Part 3 & Ending -->
             <div class="screen" id="screen10">
                 <div class="emoji-top">✨</div>
-                <div class="headline-text">Anyway, I really hope we can have some time where we can chill, chit chatting, relax, and live our best life tgt...</div>
-                <p class="subtitle"> like how we usually do last time</p>
-                <h2 style="color: var(--btn-pink); margin: 16px 0;">btw, I miss u ❤️</h2>
+                <div class="headline-text">Anyway, I really hope we can have some time where we can chill, stop talking, relax, and happily live our best life tgt...</div>
+                <p class="subtitle">自然相处 like how we usually do.</p>
+                <h2 style="color: var(--btn-pink); margin: 16px 0;">Btw, I miss u ❤️</h2>
                 <button type="button" class="btn-primary" id="sendLoveBtn" onclick="handleSendLoveClick()">Send Love 💌</button>
             </div>
         </form>
@@ -447,6 +447,16 @@
         function goToScreen(screenNumber) {
             document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
             document.getElementById('screen' + screenNumber).classList.add('active');
+        }
+
+        function validateDatesAndProceed() {
+            const date1 = document.getElementById('firstChoiceDate').value;
+            const date2 = document.getElementById('secondChoiceDate').value;
+            if (!date1 || !date2) {
+                alert("Please select both dates before proceeding!");
+                return;
+            }
+            goToScreen(7);
         }
 
         function triggerConfetti() {
