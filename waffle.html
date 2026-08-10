@@ -151,48 +151,43 @@
             color: var(--btn-pink);
         }
 
-        /* Dodging Section */
+        /* Side-by-Side Dodging Section Setup */
         .dodge-container {
             position: relative;
             width: 100%;
-            height: 140px;
+            height: 160px;
             margin-top: 10px;
             display: flex;
             justify-content: center;
             align-items: center;
+            gap: 20px;
         }
 
         #noBtn {
-            position: absolute;
-            transition: all 0.15s ease-out;
+            position: relative;
+            transition: transform 0.15s ease-out;
             z-index: 10;
         }
 
-        #hesitationText {
-            margin-top: 15px;
+        .dodge-status-text {
+            margin-top: 10px;
             font-size: 14px;
             color: var(--btn-pink);
             font-weight: 500;
-            opacity: 0;
-            transition: opacity 0.5s ease;
-        }
-
-        #hesitationText.show {
-            opacity: 1;
+            min-height: 20px;
         }
 
         /* Images */
         .feature-img {
             width: 100%;
-            max-width: 320px;
-            height: 180px;
-            object-fit: cover;
+            max-width: 380px;
+            height: auto;
             border-radius: 16px;
             margin: 15px 0;
             box-shadow: 0 8px 16px rgba(0,0,0,0.06);
         }
 
-        /* Calendar Picker Layout */
+        /* Calendar Picker Pink Styling */
         .date-picker-group {
             display: flex;
             flex-direction: column;
@@ -222,11 +217,28 @@
         .date-input-card input[type="date"] {
             border: 1px solid #ebd3d7;
             border-radius: 8px;
-            padding: 8px 12px;
+            padding: 10px 12px;
             font-family: inherit;
             color: var(--text-main);
             outline: none;
-            background: #fff8f9;
+            background: #fff0f3;
+            accent-color: #e06d88;
+            color-scheme: light;
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+        .date-input-card input[type="date"]::-webkit-calendar-picker-indicator {
+            background-color: #fce4e8;
+            padding: 4px;
+            border-radius: 50%;
+            cursor: pointer;
+            filter: invert(40%) sepia(30%) saturate(1000%) hue-rotate(310deg) brightness(95%) contrast(90%);
+        }
+
+        .date-input-card input[type="date"]:focus {
+            border-color: var(--btn-pink);
+            box-shadow: 0 0 0 3px rgba(224, 109, 136, 0.2);
         }
 
         /* Emoji Scale */
@@ -317,7 +329,6 @@
     </div>
 
     <div class="card">
-        <!-- Hidden iframe to allow form submission without reloading or navigating away -->
         <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
 
         <form id="birthdayForm" action="https://api.web3forms.com/submit" method="POST" target="hidden_iframe" onsubmit="handleFormSubmit()">
@@ -350,7 +361,7 @@
                 <button type="button" class="btn-primary" onclick="goToScreen(4)">I'm free for u 🌸</button>
             </div>
 
-            <!-- Screen 4: Dodging Question -->
+            <!-- Screen 4: Side-by-Side Dodging Question -->
             <div class="screen" id="screen4">
                 <div class="emoji-top">🥺</div>
                 <h2>Are you willing?</h2>
@@ -361,13 +372,14 @@
                     <button type="button" class="btn-secondary" id="noBtn">No</button>
                 </div>
 
-                <p id="hesitationText">我们的友情 还需要一秒的犹豫时间吗</p>
+                <p id="dodgeCounterText" class="dodge-status-text"></p>
+                <p id="hesitationText" class="dodge-status-text">我们的友情 还需要一秒的犹豫时间吗</p>
             </div>
 
-            <!-- Screen 5: Destination (Penang) -->
+            <!-- Screen 5: Destination -->
             <div class="screen" id="screen5">
                 <p class="subtitle">Since we are always planning the next trip but no one knows where to go...</p>
-                <img class="feature-img" src="penang.jpg" alt="Penang">
+                <img class="feature-img" id="https://kommodo.ai/i/17fyfVcCOunfKqKdWvQt" alt="Penang Trip">
                 <h2>The next trip we are going to is Penang! 📍</h2>
                 <p class="small-note">cause it's easier</p>
                 <button type="button" class="btn-primary" onclick="goToScreen(6)">Next ✨</button>
@@ -440,20 +452,23 @@
     </div>
 
     <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            const penangImageBase64 = "data:image/jpeg;base64," + getPenangImageData();
+            document.getElementById('penangImg').src = penangImageBase64;
+        });
+
         function goToScreen(screenNumber) {
             document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
             document.getElementById('screen' + screenNumber).classList.add('active');
         }
 
         function triggerConfetti() {
-            // Burst 1
             confetti({
                 particleCount: 100,
                 spread: 70,
                 origin: { y: 0.6 }
             });
 
-            // Burst 2 (delayed slightly for extra impact)
             setTimeout(() => {
                 confetti({
                     particleCount: 80,
@@ -490,19 +505,25 @@
             }
         }
 
-        /* Dodging "No" Button Logic */
+        /* Side-by-Side Dodging "No" Button + Live Counter Logic */
         const noBtn = document.getElementById('noBtn');
         const yesBtn = document.getElementById('yesBtn');
         const dodgeArea = document.getElementById('dodgeArea');
-        const hesitationText = document.getElementById('hesitationText');
+        const dodgeCounterText = document.getElementById('dodgeCounterText');
         let yesScale = 1.0;
-        let hesitationTimer = null;
+        let dodgeCount = 0;
 
-        function dodgeNoButton() {
+        function dodgeNoButton(e) {
+            if (e) e.preventDefault();
+            
+            dodgeCount++;
+            dodgeCounterText.textContent = `how many time u pressed no :( ${dodgeCount}`;
+
+            // Calculate bounding limits inside container
             const containerRect = dodgeArea.getBoundingClientRect();
             const btnRect = noBtn.getBoundingClientRect();
 
-            const maxX = (containerRect.width / 2) - (btnRect.width / 2) - 20;
+            const maxX = (containerRect.width / 2) - (btnRect.width / 2) - 10;
             const maxY = (containerRect.height / 2) - (btnRect.height / 2) - 10;
 
             const randomX = (Math.random() * 2 - 1) * maxX;
@@ -510,18 +531,14 @@
 
             noBtn.style.transform = `translate(${randomX}px, ${randomY}px)`;
 
-            yesScale += 0.15;
+            // Make "Yes" grow slightly as she keeps attempting to click "No"
+            yesScale += 0.1;
             yesBtn.style.transform = `scale(${yesScale})`;
-
-            if (!hesitationTimer) {
-                hesitationTimer = setTimeout(() => {
-                    hesitationText.classList.add('show');
-                }, 1000);
-            }
         }
 
         noBtn.addEventListener('mouseover', dodgeNoButton);
         noBtn.addEventListener('click', dodgeNoButton);
+        noBtn.addEventListener('touchstart', dodgeNoButton);
 
         /* Selection Helpers */
         function selectEmoji(element, moodValue) {
@@ -530,13 +547,22 @@
             document.getElementById('hiddenMoodInput').value = moodValue;
         }
 
-        /* Handle Form Ending */
+        /* Handle Form Submission: Confetti -> Pop-up Alert */
         function handleFormSubmit() {
             triggerConfetti();
-            
+
             const btn = document.getElementById('sendLoveBtn');
             btn.textContent = 'Sent with Love! 💕';
             btn.disabled = true;
+
+            setTimeout(() => {
+                alert("i love you");
+            }, 400);
+        }
+
+        function getPenangImageData() {
+            // Replace with your Base64 image string
+            return "YOUR_IMAGE_BASE64_DATA";
         }
     </script>
 </body>
