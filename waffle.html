@@ -45,13 +45,13 @@
             -webkit-backdrop-filter: blur(15px);
             border: 1px solid rgba(255, 255, 255, 0.6);
             border-radius: 32px;
-            padding: 36px 28px;
+            padding: 32px 24px;
             width: 100%;
-            max-width: 520px;
+            max-width: 480px;
             text-align: center;
             box-shadow: 0 20px 40px rgba(224, 109, 136, 0.08);
             position: relative;
-            min-height: 440px;
+            min-height: 420px;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -76,22 +76,13 @@
         }
 
         .emoji-top {
-            font-size: 44px;
-            margin-bottom: 16px;
+            font-size: 38px;
+            margin-bottom: 12px;
             line-height: 1;
         }
 
-        /* Scaled down heading sizes */
+        /* Significantly Scaled-Down Typography */
         h1 {
-            font-family: 'Playfair Display', serif;
-            font-weight: 500;
-            font-size: 30px;
-            line-height: 1.25;
-            color: var(--text-main);
-            margin-bottom: 12px;
-        }
-
-        h2 {
             font-family: 'Playfair Display', serif;
             font-weight: 500;
             font-size: 24px;
@@ -100,11 +91,21 @@
             margin-bottom: 12px;
         }
 
+        h2, .headline-text {
+            font-family: 'Playfair Display', serif;
+            font-weight: 500;
+            font-size: 19px;
+            line-height: 1.4;
+            color: var(--text-main);
+            margin-bottom: 12px;
+            max-width: 90%;
+        }
+
         p.subtitle {
-            font-size: 14px;
+            font-size: 13px;
             color: var(--text-sub);
             line-height: 1.5;
-            margin-bottom: 22px;
+            margin-bottom: 20px;
             font-weight: 400;
         }
 
@@ -112,7 +113,7 @@
             font-size: 12px;
             color: var(--text-sub);
             margin-top: -8px;
-            margin-bottom: 20px;
+            margin-bottom: 18px;
             font-style: italic;
         }
 
@@ -121,9 +122,9 @@
             background-color: var(--btn-pink);
             color: #ffffff;
             border: none;
-            padding: 12px 28px;
+            padding: 11px 26px;
             border-radius: 50px;
-            font-size: 14px;
+            font-size: 13.5px;
             font-weight: 500;
             cursor: pointer;
             box-shadow: 0 6px 16px rgba(224, 109, 136, 0.25);
@@ -142,9 +143,9 @@
             background-color: #ffffff;
             color: var(--text-sub);
             border: 1px solid #e5d8db;
-            padding: 10px 24px;
+            padding: 9px 22px;
             border-radius: 50px;
-            font-size: 13px;
+            font-size: 12.5px;
             cursor: pointer;
             transition: all 0.2s ease;
         }
@@ -158,7 +159,7 @@
         .dodge-container {
             position: relative;
             width: 100%;
-            height: 140px;
+            height: 130px;
             margin-top: 8px;
             display: flex;
             justify-content: center;
@@ -173,38 +174,38 @@
         }
 
         .dodge-status-text {
-            margin-top: 8px;
-            font-size: 13px;
+            margin-top: 6px;
+            font-size: 12px;
             color: var(--btn-pink);
             font-weight: 500;
-            min-height: 18px;
+            min-height: 16px;
         }
 
         /* Images */
         .feature-img {
             width: 100%;
-            max-width: 340px;
+            max-width: 320px;
             height: auto;
-            border-radius: 16px;
-            margin: 12px 0;
+            border-radius: 14px;
+            margin: 10px 0;
             box-shadow: 0 6px 14px rgba(0,0,0,0.06);
         }
 
-        /* Calendar Picker Pink Styling */
+        /* Calendar Picker Styling */
         .date-picker-group {
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 10px;
             width: 100%;
-            max-width: 320px;
-            margin-bottom: 20px;
+            max-width: 300px;
+            margin-bottom: 18px;
         }
 
         .date-input-card {
             background: #ffffff;
             border: 1.5px solid #f0e2e5;
-            padding: 10px 14px;
-            border-radius: 14px;
+            padding: 8px 12px;
+            border-radius: 12px;
             text-align: left;
             display: flex;
             flex-direction: column;
@@ -212,17 +213,17 @@
         }
 
         .date-input-card label {
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 600;
             color: var(--btn-pink);
         }
 
         .date-input-card input[type="date"] {
             border: 1px solid #ebd3d7;
-            border-radius: 8px;
-            padding: 8px 10px;
+            border-radius: 6px;
+            padding: 6px 8px;
             font-family: inherit;
-            font-size: 13px;
+            font-size: 12px;
             color: var(--text-main);
             outline: none;
             background: #fff0f3;
@@ -232,25 +233,17 @@
             cursor: pointer;
         }
 
-        .date-input-card input[type="date"]::-webkit-calendar-picker-indicator {
-            background-color: #fce4e8;
-            padding: 3px;
-            border-radius: 50%;
-            cursor: pointer;
-            filter: invert(40%) sepia(30%) saturate(1000%) hue-rotate(310deg) brightness(95%) contrast(90%);
-        }
-
         /* Emoji Scale */
         .emoji-scale {
             display: flex;
             justify-content: space-between;
             width: 100%;
-            max-width: 300px;
-            margin: 12px 0 20px;
+            max-width: 280px;
+            margin: 10px 0 16px;
         }
 
         .emoji-item {
-            font-size: 28px;
+            font-size: 26px;
             cursor: pointer;
             transition: transform 0.2s ease, filter 0.2s ease;
             filter: grayscale(40%);
@@ -264,16 +257,16 @@
         /* Textarea */
         textarea {
             width: 100%;
-            max-width: 360px;
-            height: 90px;
-            border-radius: 14px;
+            max-width: 340px;
+            height: 80px;
+            border-radius: 12px;
             border: 1px solid #ebd3d7;
-            padding: 12px;
+            padding: 10px;
             font-family: inherit;
-            font-size: 13px;
+            font-size: 12px;
             outline: none;
             resize: none;
-            margin-bottom: 16px;
+            margin-bottom: 14px;
             background: rgba(255, 255, 255, 0.8);
         }
 
@@ -291,7 +284,7 @@
             backdrop-filter: blur(10px);
             border: 1px solid rgba(224, 109, 136, 0.3);
             border-radius: 30px;
-            padding: 6px 14px;
+            padding: 6px 12px;
             display: flex;
             align-items: center;
             gap: 8px;
@@ -304,13 +297,13 @@
             color: white;
             border: none;
             border-radius: 50%;
-            width: 28px;
-            height: 28px;
+            width: 26px;
+            height: 26px;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            font-size: 12px;
+            font-size: 11px;
         }
     </style>
 </head>
@@ -323,14 +316,12 @@
 
     <!-- Floating Audio Control Toggle -->
     <div class="audio-player-widget">
-        <span style="font-size: 12px; color: var(--text-sub);">🎵 Music</span>
+        <span style="font-size: 11px; color: var(--text-sub);">🎵 Music</span>
         <button type="button" class="audio-btn" id="audioToggleBtn" onclick="toggleAudio()">▶</button>
     </div>
 
     <div class="card">
-        <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
-
-        <form id="birthdayForm" action="https://api.web3forms.com/submit" method="POST" target="hidden_iframe" onsubmit="handleFormSubmit(event)">
+        <form id="birthdayForm">
             <!-- REPLACE 'YOUR_ACCESS_KEY_HERE' WITH YOUR WEB3FORMS KEY -->
             <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE">
             <input type="hidden" name="subject" value="New Birthday Response from BB Anne! 💕">
@@ -378,7 +369,7 @@
             <!-- Screen 5: Destination -->
             <div class="screen" id="screen5">
                 <p class="subtitle">Since we are always planning the next trip but no one knows where to go...</p>
-                <img class="feature-img" id="penangImg" alt="Penang Trip">
+                <img class="feature-img" id="https://ibb.co/xtvPMGGg" alt="Penang Trip">
                 <h2>The next trip we are going to is Penang! 📍</h2>
                 <p class="small-note">cause it's easier</p>
                 <button type="button" class="btn-primary" onclick="goToScreen(6)">Next ✨</button>
@@ -407,7 +398,7 @@
             <!-- Screen 7: Mood & Memory -->
             <div class="screen" id="screen7">
                 <h2>Thank u for ur time! ❤️</h2>
-                <p class="subtitle" style="margin-bottom: 8px;">Are u happy today?</p>
+                <p class="subtitle" style="margin-bottom: 6px;">Are u happy today?</p>
                 
                 <div class="emoji-scale">
                     <span class="emoji-item" onclick="selectEmoji(this, '😡 Angry')">😡</span>
@@ -417,7 +408,7 @@
                     <span class="emoji-item" onclick="selectEmoji(this, '😁 Super Happy')">😁</span>
                 </div>
 
-                <p class="subtitle" style="margin-bottom: 8px;">Ya it's easy as it's just like that... can u share ur memory with me? Because I wan us to share feelings with each other so we can keep up our friendship...</p>
+                <p class="subtitle" style="margin-bottom: 6px;">Ya it's easy as it's just like that... can u share ur memory with me? Because I wan us to share feelings with each other so we can keep up our friendship...</p>
                 <textarea name="user_memory_feeling" placeholder="Write a memory or feeling here..."></textarea>
 
                 <button type="button" class="btn-primary" onclick="goToScreen(8)">Next 💌</button>
@@ -442,9 +433,9 @@
             <!-- Screen 10: Heart-to-Heart Part 3 & Ending -->
             <div class="screen" id="screen10">
                 <div class="emoji-top">✨</div>
-                <h2>Anyway, I really hope we can have some time where we can chill, stop talking, relax, and happily live our best life tgt...</h2>
+                <div class="headline-text">Anyway, I really hope we can have some time where we can chill, stop talking, relax, and happily live our best life tgt...</div>
                 <p class="subtitle">自然相处 like how we usually do.</p>
-                <h2 style="color: var(--btn-pink); margin: 16px 0;">Btw, I miss u ❤️</h2>
+                <h2 style="color: var(--btn-pink); margin: 12px 0;">Btw, I miss u ❤️</h2>
                 <button type="button" class="btn-primary" id="sendLoveBtn" onclick="handleSendLoveClick()">Send Love 💌</button>
             </div>
         </form>
@@ -465,25 +456,10 @@
 
         function triggerConfetti() {
             confetti({
-                particleCount: 120,
-                spread: 80,
+                particleCount: 100,
+                spread: 70,
                 origin: { y: 0.6 }
             });
-
-            setTimeout(() => {
-                confetti({
-                    particleCount: 80,
-                    angle: 60,
-                    spread: 55,
-                    origin: { x: 0 }
-                });
-                confetti({
-                    particleCount: 80,
-                    angle: 120,
-                    spread: 55,
-                    origin: { x: 1 }
-                });
-            }, 250);
         }
 
         /* Audio Toggle Logic */
@@ -546,25 +522,25 @@
             document.getElementById('hiddenMoodInput').value = moodValue;
         }
 
-        /* Send Love Click: Confetti on EVERY click + Form Submit + Alert Popup */
+        /* Send Love Click: Background Submit + Repeat Confetti + Popup Alert */
         function handleSendLoveClick() {
-            // 1. Pop confetti every single time she clicks!
+            // 1. Pop confetti on every single click
             triggerConfetti();
 
-            // 2. Submit form in background on first click
+            // 2. Submit form silently via fetch on first click
             if (!hasSubmittedForm) {
-                document.getElementById('birthdayForm').submit();
+                const formData = new FormData(document.getElementById('birthdayForm'));
+                fetch("https://api.web3forms.com/submit", {
+                    method: "POST",
+                    body: formData
+                }).catch(err => console.log(err));
+
                 hasSubmittedForm = true;
+                document.getElementById('sendLoveBtn').textContent = 'Sent with Love! 💕 (Click for more)';
             }
 
-            // 3. Update button text slightly
-            const btn = document.getElementById('sendLoveBtn');
-            btn.textContent = 'Sent with Love! 💕 (Click for more)';
-
-            // 4. Pop-up alert saying "i love you"
-            setTimeout(() => {
-                alert("i love you");
-            }, 300);
+            // 3. Fire the alert pop-up directly
+            alert("i love you");
         }
 
         function getPenangImageData() {
