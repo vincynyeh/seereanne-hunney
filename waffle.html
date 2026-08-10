@@ -185,33 +185,41 @@
             box-shadow: 0 8px 16px rgba(0,0,0,0.06);
         }
 
-        /* Option Grid */
-        .options-grid {
+        /* Calendar Picker Layout */
+        .date-picker-group {
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 16px;
             width: 100%;
             max-width: 340px;
             margin-bottom: 24px;
         }
 
-        .option-card {
+        .date-input-card {
             background: #ffffff;
             border: 2px solid #f0e2e5;
-            padding: 14px 20px;
+            padding: 12px 16px;
             border-radius: 16px;
-            cursor: pointer;
-            font-size: 15px;
-            color: var(--text-main);
-            transition: all 0.2s ease;
-            text-align: center;
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
         }
 
-        .option-card:hover, .option-card.selected {
-            border-color: var(--btn-pink);
-            background: #fff8f9;
-            color: var(--btn-pink);
+        .date-input-card label {
+            font-size: 13px;
             font-weight: 600;
+            color: var(--btn-pink);
+        }
+
+        .date-input-card input[type="date"] {
+            border: 1px solid #ebd3d7;
+            border-radius: 8px;
+            padding: 8px 12px;
+            font-family: inherit;
+            color: var(--text-main);
+            outline: none;
+            background: #fff8f9;
         }
 
         /* Emoji Scale */
@@ -255,119 +263,172 @@
             border-color: var(--btn-pink);
             box-shadow: 0 0 0 3px rgba(224, 109, 136, 0.15);
         }
+
+        /* Audio Control Player Widget */
+        .audio-player-widget {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(224, 109, 136, 0.3);
+            border-radius: 30px;
+            padding: 8px 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
+            z-index: 1000;
+        }
+
+        .audio-btn {
+            background: var(--btn-pink);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 14px;
+        }
     </style>
 </head>
 <body>
 
+    <!-- Audio Player (Replace src with your music link) -->
+    <audio id="bgMusic" loop>
+        <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=lofi-study-112191.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Floating Audio Control Toggle -->
+    <div class="audio-player-widget">
+        <span style="font-size: 13px; color: var(--text-sub);">🎵 Music</span>
+        <button type="button" class="audio-btn" id="audioToggleBtn" onclick="toggleAudio()">▶</button>
+    </div>
+
     <div class="card">
-        
-        <!-- Screen 1: Landing Page -->
-        <div class="screen active" id="screen1">
-            <div class="emoji-top">🎂</div>
-            <h1>Happy Birthday<br>BB Anne!! 🎉</h1>
-            <p class="subtitle">wishing u all the happiness today and always 🌸<br>u deserve every bit of it 💕</p>
-            <button class="btn-primary" onclick="goToScreen(2); triggerConfetti();">open ur gift 🎁</button>
-        </div>
+        <!-- Form wrapper for capturing Web3Forms entries -->
+        <form id="birthdayForm" action="https://api.web3forms.com/submit" method="POST" onsubmit="handleFormSubmit(event)">
+            <!-- REPLACE 'YOUR_ACCESS_KEY_HERE' WITH YOUR WEB3FORMS KEY -->
+            <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE">
+            <input type="hidden" name="subject" value="New Birthday Response from BB Anne! 💕">
+            <input type="hidden" name="selected_mood" id="hiddenMoodInput" value="Not specified">
 
-        <!-- Screen 2: Staycation Invite -->
-        <div class="screen" id="screen2">
-            <div class="emoji-top">🫰</div>
-            <h2>may i ask u out during your free time if possible? for staycation one or two days 🫰🫰</h2>
-            <p class="subtitle"></p>
-            <button class="btn-primary" onclick="goToScreen(3)">sure bish</button>
-        </div>
-
-        <!-- Screen 3: Appointment Check -->
-        <div class="screen" id="screen3">
-            <div class="emoji-top">📅</div>
-            <h2>Are you free to make an appointment?</h2>
-            <p class="subtitle">Im afraid that u r not free only to me 🙁</p>
-            <button class="btn-primary" onclick="goToScreen(4)">I'm free for u 🌸</button>
-        </div>
-
-        <!-- Screen 4: Dodging Question -->
-        <div class="screen" id="screen4">
-            <div class="emoji-top">🥺</div>
-            <h2>Are you willing?</h2>
-            <p class="subtitle">choose carefully hehe</p>
-            
-            <div class="dodge-container" id="dodgeArea">
-                <button class="btn-primary" id="yesBtn" onclick="goToScreen(5)">Yes 💖</button>
-                <button class="btn-secondary" id="noBtn">No</button>
+            <!-- Screen 1: Landing Page -->
+            <div class="screen active" id="screen1">
+                <div class="emoji-top">🎂</div>
+                <h1>Happy Birthday<br>BB Anne!! 🎉</h1>
+                <p class="subtitle">wishing u all the happiness today and always 🌸<br>u deserve every bit of it 💕</p>
+                <button type="button" class="btn-primary" onclick="goToScreen(2); triggerConfetti(); tryPlayAudio();">open ur gift 🎁</button>
             </div>
 
-            <p id="hesitationText">我们的友情 还需要一秒的犹豫时间吗</p>
-        </div>
-
-        <!-- Screen 5: Destination (Penang) -->
-        <div class="screen" id="screen5">
-            <p class="subtitle">Since we are always planning the next trip but no one knows where to go, I will write it down now... 🌊</p>
-            <!-- Penang Image Placeholder -->
-            <img class="feature-img" src="https://images.unsplash.com/photo-1596422846543-75c6fc197f07?auto=format&fit=crop&w=600&q=80" alt="Penang">
-            <h2>The next trip we are going to is Penang! 📍</h2>
-            <p class="small-note">cause it's easier</p>
-            <button class="btn-primary" onclick="goToScreen(6)">Next ✨</button>
-        </div>
-
-        <!-- Screen 6: Date Picker -->
-        <div class="screen" id="screen6">
-            <div class="emoji-top">🥰</div>
-            <h2>I'm glad that u choose yes with sincerity! I think u are excited for ittt</h2>
-            <p class="subtitle">Let's pick a time in calendar 2026:</p>
-            
-            <div class="options-grid">
-                <div class="option-card" onclick="selectOption(this)">Option A: Sept / Oct 2026</div>
-                <div class="option-card" onclick="selectOption(this)">Option B: Nov / Dec 2026</div>
-                <div class="option-card" onclick="selectOption(this)">Option C: Flexible / Let's decide later</div>
+            <!-- Screen 2: Staycation Invite -->
+            <div class="screen" id="screen2">
+                <div class="emoji-top">🫰</div>
+                <h2>may i ask u out during your free time if possible? for staycation one or two days 🫰🫰</h2>
+                <p class="subtitle"></p>
+                <button type="button" class="btn-primary" onclick="goToScreen(3)">sure bish</button>
             </div>
 
-            <button class="btn-primary" onclick="goToScreen(7)">Confirm Date 📅</button>
-        </div>
-
-        <!-- Screen 7: Mood & Memory -->
-        <div class="screen" id="screen7">
-            <h2>Thank u for ur time! ❤️</h2>
-            <p class="subtitle" style="margin-bottom: 10px;">Are u happy today?</p>
-            
-            <div class="emoji-scale">
-                <span class="emoji-item" onclick="selectEmoji(this)">😡</span>
-                <span class="emoji-item" onclick="selectEmoji(this)">🙁</span>
-                <span class="emoji-item" onclick="selectEmoji(this)">😐</span>
-                <span class="emoji-item" onclick="selectEmoji(this)">😊</span>
-                <span class="emoji-item" onclick="selectEmoji(this)">😁</span>
+            <!-- Screen 3: Appointment Check -->
+            <div class="screen" id="screen3">
+                <div class="emoji-top">📅</div>
+                <h2>Are you free to make an appointment?</h2>
+                <p class="subtitle">Im afraid that u r not free only to me 🙁</p>
+                <button type="button" class="btn-primary" onclick="goToScreen(4)">I'm free for u 🌸</button>
             </div>
 
-            <p class="subtitle" style="margin-bottom: 10px;">Ya it's easy as it's just like that... can u share ur memory with me? Because I wan us to share feelings with each other so we can keep up our friendship...</p>
-            <textarea placeholder="Write a memory or feeling here..."></textarea>
+            <!-- Screen 4: Dodging Question -->
+            <div class="screen" id="screen4">
+                <div class="emoji-top">🥺</div>
+                <h2>Are you willing?</h2>
+                <p class="subtitle">你没有得不willing我告诉你</p>
+                
+                <div class="dodge-container" id="dodgeArea">
+                    <button type="button" class="btn-primary" id="yesBtn" onclick="goToScreen(5)">Yes 💖</button>
+                    <button type="button" class="btn-secondary" id="noBtn">No</button>
+                </div>
 
-            <button class="btn-primary" onclick="goToScreen(8)">Next 💌</button>
-        </div>
+                <p id="hesitationText">我们的友情 还需要一秒的犹豫时间吗</p>
+            </div>
 
-        <!-- Screen 8: Heart-to-Heart Part 1 -->
-        <div class="screen" id="screen8">
-            <div class="emoji-top">💭</div>
-            <h2>I feel like we seldom catch up with each other and go out anymore...</h2>
-            <p class="subtitle">Idk, is it because smtg sad has been happening to me lately, so I feel like I'm a bit lonely...</p>
-            <button class="btn-primary" onclick="goToScreen(9)">Next 🤍</button>
-        </div>
+            <!-- Screen 5: Destination (Penang) -->
+            <div class="screen" id="screen5">
+                <p class="subtitle">Since we are always planning the next trip but no one knows where to go...</p>
+                <!-- Replace src with an image host URL or relative image file name -->
+                <img class="feature-img" src="penang.jpg" alt="Penang">
+                <h2>The next trip we are going to is Penang! 📍</h2>
+                <p class="small-note">cause it's easier</p>
+                <button type="button" class="btn-primary" onclick="goToScreen(6)">Next ✨</button>
+            </div>
 
-        <!-- Screen 9: Heart-to-Heart Part 2 -->
-        <div class="screen" id="screen9">
-            <div class="emoji-top">🫂</div>
-            <h2>And I noticed we have been really getting stranger, idk why... to each other</h2>
-            <p class="subtitle">but I wan to keep this friendship alive.</p>
-            <button class="btn-primary" onclick="goToScreen(10)">Next ✨</button>
-        </div>
+            <!-- Screen 6: Interactive Date Picker -->
+            <div class="screen" id="screen6">
+                <div class="emoji-top">🥰</div>
+                <h2>I'm glad that u choose yes with sincerity! I think u are excited for ittt</h2>
+                <p class="subtitle">Let's pick two potential dates in the calendar:</p>
+                
+                <div class="date-picker-group">
+                    <div class="date-input-card">
+                        <label for="firstChoiceDate">1st Choice Date:</label>
+                        <input type="date" id="firstChoiceDate" name="1st_choice_date" required>
+                    </div>
+                    <div class="date-input-card">
+                        <label for="secondChoiceDate">2nd Choice Date:</label>
+                        <input type="date" id="secondChoiceDate" name="2nd_choice_date" required>
+                    </div>
+                </div>
 
-        <!-- Screen 10: Heart-to-Heart Part 3 & Final Message -->
-        <div class="screen" id="screen10">
-            <div class="emoji-top">✨</div>
-            <h2>Anyway, I really hope we can have some time where we can chill, stop talking, relax, and happily live our best life tgt...</h2>
-            <p class="subtitle">自然相处 like how we usually do.</p>
-            <h1 style="color: var(--btn-pink); margin: 20px 0;">Btw, I miss u ❤️</h1>
-            <button class="btn-primary" onclick="triggerConfetti(); alert('Sent with love! 💕');">Send Love 💌</button>
-        </div>
+                <button type="button" class="btn-primary" onclick="goToScreen(7)">Confirm Dates 📅</button>
+            </div>
 
+            <!-- Screen 7: Mood & Memory -->
+            <div class="screen" id="screen7">
+                <h2>Thank u for ur time! ❤️</h2>
+                <p class="subtitle" style="margin-bottom: 10px;">Are u happy today?</p>
+                
+                <div class="emoji-scale">
+                    <span class="emoji-item" onclick="selectEmoji(this, '😡 Angry')">😡</span>
+                    <span class="emoji-item" onclick="selectEmoji(this, '🙁 Sad')">🙁</span>
+                    <span class="emoji-item" onclick="selectEmoji(this, '😐 Neutral')">😐</span>
+                    <span class="emoji-item" onclick="selectEmoji(this, '😊 Happy')">😊</span>
+                    <span class="emoji-item" onclick="selectEmoji(this, '😁 Super Happy')">😁</span>
+                </div>
+
+                <p class="subtitle" style="margin-bottom: 10px;">Ya it's easy as it's just like that... can u share ur memory with me? Because I wan us to share feelings with each other so we can keep up our friendship...</p>
+                <textarea name="user_memory_feeling" placeholder="Write a memory or feeling here..."></textarea>
+
+                <button type="button" class="btn-primary" onclick="goToScreen(8)">Next 💌</button>
+            </div>
+
+            <!-- Screen 8: Heart-to-Heart Part 1 -->
+            <div class="screen" id="screen8">
+                <div class="emoji-top">💭</div>
+                <h2>I feel like we seldom catch up with each other and go out anymore...</h2>
+                <p class="subtitle">Idk, is it because smtg sad has been happening to me lately, so I feel like I'm a bit lonely...</p>
+                <button type="button" class="btn-primary" onclick="goToScreen(9)">Next 🤍</button>
+            </div>
+
+            <!-- Screen 9: Heart-to-Heart Part 2 -->
+            <div class="screen" id="screen9">
+                <div class="emoji-top">🫂</div>
+                <h2>And I noticed we have been really getting stranger, idk why... to each other</h2>
+                <p class="subtitle">but I wan to keep this friendship alive.</p>
+                <button type="button" class="btn-primary" onclick="goToScreen(10)">Next ✨</button>
+            </div>
+
+            <!-- Screen 10: Heart-to-Heart Part 3 & Final Submission Message -->
+            <div class="screen" id="screen10">
+                <div class="emoji-top">✨</div>
+                <h2>Anyway, I really hope we can have some time where we can chill, stop talking, relax, and happily live our best life tgt...</h2>
+                <p class="subtitle">自然相处 like how we usually do.</p>
+                <h1 style="color: var(--btn-pink); margin: 20px 0;">Btw, I miss u ❤️</h1>
+                <button type="submit" class="btn-primary">Send Love 💌</button>
+            </div>
+        </form>
     </div>
 
     <script>
@@ -384,6 +445,28 @@
             });
         }
 
+        /* Audio Toggle Logic */
+        const bgMusic = document.getElementById('bgMusic');
+        const audioToggleBtn = document.getElementById('audioToggleBtn');
+
+        function tryPlayAudio() {
+            bgMusic.play().then(() => {
+                audioToggleBtn.textContent = '⏸';
+            }).catch(() => {
+                // Autoplay blocked by browser policy until clicked manually
+            });
+        }
+
+        function toggleAudio() {
+            if (bgMusic.paused) {
+                bgMusic.play();
+                audioToggleBtn.textContent = '⏸';
+            } else {
+                bgMusic.pause();
+                audioToggleBtn.textContent = '▶';
+            }
+        }
+
         /* Dodging "No" Button & Growing "Yes" Button Logic */
         const noBtn = document.getElementById('noBtn');
         const yesBtn = document.getElementById('yesBtn');
@@ -396,7 +479,6 @@
             const containerRect = dodgeArea.getBoundingClientRect();
             const btnRect = noBtn.getBoundingClientRect();
 
-            // Calculate safe boundaries
             const maxX = (containerRect.width / 2) - (btnRect.width / 2) - 20;
             const maxY = (containerRect.height / 2) - (btnRect.height / 2) - 10;
 
@@ -405,11 +487,9 @@
 
             noBtn.style.transform = `translate(${randomX}px, ${randomY}px)`;
 
-            // Grow "Yes" button
             yesScale += 0.15;
             yesBtn.style.transform = `scale(${yesScale})`;
 
-            // Trigger delayed text after 1 second
             if (!hesitationTimer) {
                 hesitationTimer = setTimeout(() => {
                     hesitationText.classList.add('show');
@@ -421,14 +501,16 @@
         noBtn.addEventListener('click', dodgeNoButton);
 
         /* Selection Helpers */
-        function selectOption(element) {
-            document.querySelectorAll('.option-card').forEach(c => c.classList.remove('selected'));
-            element.classList.add('selected');
-        }
-
-        function selectEmoji(element) {
+        function selectEmoji(element, moodValue) {
             document.querySelectorAll('.emoji-item').forEach(e => e.classList.remove('selected'));
             element.classList.add('selected');
+            document.getElementById('hiddenMoodInput').value = moodValue;
+        }
+
+        /* Form Handler */
+        function handleFormSubmit(e) {
+            triggerConfetti();
+            alert('Sent with love! Your responses have been delivered 💕');
         }
     </script>
 </body>
