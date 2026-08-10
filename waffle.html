@@ -128,6 +128,13 @@
             box-shadow: 0 10px 24px rgba(224, 109, 136, 0.4);
         }
 
+        .btn-primary:disabled {
+            background-color: #d1b2b8;
+            cursor: not-allowed;
+            box-shadow: none;
+            transform: none;
+        }
+
         .btn-secondary {
             background-color: #ffffff;
             color: var(--text-sub);
@@ -298,7 +305,7 @@
 </head>
 <body>
 
-    <!-- Audio Player (Replace src with your music link) -->
+    <!-- Audio Player -->
     <audio id="bgMusic" loop>
         <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=lofi-study-112191.mp3" type="audio/mpeg">
     </audio>
@@ -310,8 +317,10 @@
     </div>
 
     <div class="card">
-        <!-- Form wrapper for capturing Web3Forms entries -->
-        <form id="birthdayForm" action="https://api.web3forms.com/submit" method="POST" onsubmit="handleFormSubmit(event)">
+        <!-- Hidden iframe to allow form submission without reloading or navigating away -->
+        <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
+
+        <form id="birthdayForm" action="https://api.web3forms.com/submit" method="POST" target="hidden_iframe" onsubmit="handleFormSubmit()">
             <!-- REPLACE 'YOUR_ACCESS_KEY_HERE' WITH YOUR WEB3FORMS KEY -->
             <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE">
             <input type="hidden" name="subject" value="New Birthday Response from BB Anne! 💕">
@@ -358,8 +367,7 @@
             <!-- Screen 5: Destination (Penang) -->
             <div class="screen" id="screen5">
                 <p class="subtitle">Since we are always planning the next trip but no one knows where to go...</p>
-                <!-- Replace src with an image host URL or relative image file name -->
-                <img class="feature-img" src="https://imgur.com/a/wXAOFdD" alt="Penang">
+                <img class="feature-img" src="penang.jpg" alt="Penang">
                 <h2>The next trip we are going to is Penang! 📍</h2>
                 <p class="small-note">cause it's easier</p>
                 <button type="button" class="btn-primary" onclick="goToScreen(6)">Next ✨</button>
@@ -420,13 +428,13 @@
                 <button type="button" class="btn-primary" onclick="goToScreen(10)">Next ✨</button>
             </div>
 
-            <!-- Screen 10: Heart-to-Heart Part 3 & Final Submission Message -->
+            <!-- Screen 10: Heart-to-Heart Part 3 & Ending -->
             <div class="screen" id="screen10">
                 <div class="emoji-top">✨</div>
                 <h2>Anyway, I really hope we can have some time where we can chill, stop talking, relax, and happily live our best life tgt...</h2>
                 <p class="subtitle">自然相处 like how we usually do.</p>
                 <h1 style="color: var(--btn-pink); margin: 20px 0;">Btw, I miss u ❤️</h1>
-                <button type="submit" class="btn-primary">Send Love 💌</button>
+                <button type="submit" class="btn-primary" id="sendLoveBtn">Send Love 💌</button>
             </div>
         </form>
     </div>
@@ -438,11 +446,28 @@
         }
 
         function triggerConfetti() {
+            // Burst 1
             confetti({
                 particleCount: 100,
                 spread: 70,
                 origin: { y: 0.6 }
             });
+
+            // Burst 2 (delayed slightly for extra impact)
+            setTimeout(() => {
+                confetti({
+                    particleCount: 80,
+                    angle: 60,
+                    spread: 55,
+                    origin: { x: 0 }
+                });
+                confetti({
+                    particleCount: 80,
+                    angle: 120,
+                    spread: 55,
+                    origin: { x: 1 }
+                });
+            }, 300);
         }
 
         /* Audio Toggle Logic */
@@ -452,9 +477,7 @@
         function tryPlayAudio() {
             bgMusic.play().then(() => {
                 audioToggleBtn.textContent = '⏸';
-            }).catch(() => {
-                // Autoplay blocked by browser policy until clicked manually
-            });
+            }).catch(() => {});
         }
 
         function toggleAudio() {
@@ -467,7 +490,7 @@
             }
         }
 
-        /* Dodging "No" Button & Growing "Yes" Button Logic */
+        /* Dodging "No" Button Logic */
         const noBtn = document.getElementById('noBtn');
         const yesBtn = document.getElementById('yesBtn');
         const dodgeArea = document.getElementById('dodgeArea');
@@ -507,10 +530,13 @@
             document.getElementById('hiddenMoodInput').value = moodValue;
         }
 
-        /* Form Handler */
-        function handleFormSubmit(e) {
+        /* Handle Form Ending */
+        function handleFormSubmit() {
             triggerConfetti();
-            alert('Sent with love! Your responses have been delivered 💕');
+            
+            const btn = document.getElementById('sendLoveBtn');
+            btn.textContent = 'Sent with Love! 💕';
+            btn.disabled = true;
         }
     </script>
 </body>
