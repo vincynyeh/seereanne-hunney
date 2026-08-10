@@ -45,13 +45,13 @@
             -webkit-backdrop-filter: blur(15px);
             border: 1px solid rgba(255, 255, 255, 0.6);
             border-radius: 32px;
-            padding: 48px 36px;
+            padding: 36px 28px;
             width: 100%;
-            max-width: 580px;
+            max-width: 520px;
             text-align: center;
             box-shadow: 0 20px 40px rgba(224, 109, 136, 0.08);
             position: relative;
-            min-height: 480px;
+            min-height: 440px;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -76,33 +76,43 @@
         }
 
         .emoji-top {
-            font-size: 56px;
-            margin-bottom: 20px;
+            font-size: 44px;
+            margin-bottom: 16px;
             line-height: 1;
         }
 
-        h1, h2 {
+        /* Scaled down heading sizes */
+        h1 {
             font-family: 'Playfair Display', serif;
             font-weight: 500;
-            font-size: 38px;
+            font-size: 30px;
             line-height: 1.25;
             color: var(--text-main);
-            margin-bottom: 16px;
+            margin-bottom: 12px;
+        }
+
+        h2 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 500;
+            font-size: 24px;
+            line-height: 1.3;
+            color: var(--text-main);
+            margin-bottom: 12px;
         }
 
         p.subtitle {
-            font-size: 16px;
+            font-size: 14px;
             color: var(--text-sub);
-            line-height: 1.6;
-            margin-bottom: 28px;
+            line-height: 1.5;
+            margin-bottom: 22px;
             font-weight: 400;
         }
 
         p.small-note {
-            font-size: 13px;
+            font-size: 12px;
             color: var(--text-sub);
-            margin-top: -10px;
-            margin-bottom: 24px;
+            margin-top: -8px;
+            margin-bottom: 20px;
             font-style: italic;
         }
 
@@ -111,12 +121,12 @@
             background-color: var(--btn-pink);
             color: #ffffff;
             border: none;
-            padding: 14px 32px;
+            padding: 12px 28px;
             border-radius: 50px;
-            font-size: 15px;
+            font-size: 14px;
             font-weight: 500;
             cursor: pointer;
-            box-shadow: 0 8px 20px rgba(224, 109, 136, 0.3);
+            box-shadow: 0 6px 16px rgba(224, 109, 136, 0.25);
             transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
             text-decoration: none;
             display: inline-block;
@@ -125,23 +135,16 @@
         .btn-primary:hover {
             background-color: var(--btn-hover);
             transform: translateY(-2px);
-            box-shadow: 0 10px 24px rgba(224, 109, 136, 0.4);
-        }
-
-        .btn-primary:disabled {
-            background-color: #d1b2b8;
-            cursor: not-allowed;
-            box-shadow: none;
-            transform: none;
+            box-shadow: 0 8px 20px rgba(224, 109, 136, 0.35);
         }
 
         .btn-secondary {
             background-color: #ffffff;
             color: var(--text-sub);
             border: 1px solid #e5d8db;
-            padding: 12px 28px;
+            padding: 10px 24px;
             border-radius: 50px;
-            font-size: 14px;
+            font-size: 13px;
             cursor: pointer;
             transition: all 0.2s ease;
         }
@@ -151,16 +154,16 @@
             color: var(--btn-pink);
         }
 
-        /* Side-by-Side Dodging Section Setup */
+        /* Side-by-Side Dodging Section */
         .dodge-container {
             position: relative;
             width: 100%;
-            height: 160px;
-            margin-top: 10px;
+            height: 140px;
+            margin-top: 8px;
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 20px;
+            gap: 16px;
         }
 
         #noBtn {
@@ -170,46 +173,46 @@
         }
 
         .dodge-status-text {
-            margin-top: 10px;
-            font-size: 14px;
+            margin-top: 8px;
+            font-size: 13px;
             color: var(--btn-pink);
             font-weight: 500;
-            min-height: 20px;
+            min-height: 18px;
         }
 
         /* Images */
         .feature-img {
             width: 100%;
-            max-width: 380px;
+            max-width: 340px;
             height: auto;
             border-radius: 16px;
-            margin: 15px 0;
-            box-shadow: 0 8px 16px rgba(0,0,0,0.06);
+            margin: 12px 0;
+            box-shadow: 0 6px 14px rgba(0,0,0,0.06);
         }
 
         /* Calendar Picker Pink Styling */
         .date-picker-group {
             display: flex;
             flex-direction: column;
-            gap: 16px;
+            gap: 12px;
             width: 100%;
-            max-width: 340px;
-            margin-bottom: 24px;
+            max-width: 320px;
+            margin-bottom: 20px;
         }
 
         .date-input-card {
             background: #ffffff;
-            border: 2px solid #f0e2e5;
-            padding: 12px 16px;
-            border-radius: 16px;
+            border: 1.5px solid #f0e2e5;
+            padding: 10px 14px;
+            border-radius: 14px;
             text-align: left;
             display: flex;
             flex-direction: column;
-            gap: 6px;
+            gap: 4px;
         }
 
         .date-input-card label {
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 600;
             color: var(--btn-pink);
         }
@@ -217,8 +220,9 @@
         .date-input-card input[type="date"] {
             border: 1px solid #ebd3d7;
             border-radius: 8px;
-            padding: 10px 12px;
+            padding: 8px 10px;
             font-family: inherit;
+            font-size: 13px;
             color: var(--text-main);
             outline: none;
             background: #fff0f3;
@@ -230,15 +234,10 @@
 
         .date-input-card input[type="date"]::-webkit-calendar-picker-indicator {
             background-color: #fce4e8;
-            padding: 4px;
+            padding: 3px;
             border-radius: 50%;
             cursor: pointer;
             filter: invert(40%) sepia(30%) saturate(1000%) hue-rotate(310deg) brightness(95%) contrast(90%);
-        }
-
-        .date-input-card input[type="date"]:focus {
-            border-color: var(--btn-pink);
-            box-shadow: 0 0 0 3px rgba(224, 109, 136, 0.2);
         }
 
         /* Emoji Scale */
@@ -246,35 +245,35 @@
             display: flex;
             justify-content: space-between;
             width: 100%;
-            max-width: 320px;
-            margin: 15px 0 25px;
+            max-width: 300px;
+            margin: 12px 0 20px;
         }
 
         .emoji-item {
-            font-size: 32px;
+            font-size: 28px;
             cursor: pointer;
             transition: transform 0.2s ease, filter 0.2s ease;
             filter: grayscale(40%);
         }
 
         .emoji-item:hover, .emoji-item.selected {
-            transform: scale(1.3);
+            transform: scale(1.25);
             filter: grayscale(0%);
         }
 
         /* Textarea */
         textarea {
             width: 100%;
-            max-width: 380px;
-            height: 100px;
-            border-radius: 16px;
+            max-width: 360px;
+            height: 90px;
+            border-radius: 14px;
             border: 1px solid #ebd3d7;
-            padding: 14px;
+            padding: 12px;
             font-family: inherit;
-            font-size: 14px;
+            font-size: 13px;
             outline: none;
             resize: none;
-            margin-bottom: 20px;
+            margin-bottom: 16px;
             background: rgba(255, 255, 255, 0.8);
         }
 
@@ -292,11 +291,11 @@
             backdrop-filter: blur(10px);
             border: 1px solid rgba(224, 109, 136, 0.3);
             border-radius: 30px;
-            padding: 8px 16px;
+            padding: 6px 14px;
             display: flex;
             align-items: center;
-            gap: 10px;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
+            gap: 8px;
+            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
             z-index: 1000;
         }
 
@@ -305,13 +304,13 @@
             color: white;
             border: none;
             border-radius: 50%;
-            width: 32px;
-            height: 32px;
+            width: 28px;
+            height: 28px;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            font-size: 14px;
+            font-size: 12px;
         }
     </style>
 </head>
@@ -324,14 +323,14 @@
 
     <!-- Floating Audio Control Toggle -->
     <div class="audio-player-widget">
-        <span style="font-size: 13px; color: var(--text-sub);">🎵 Music</span>
+        <span style="font-size: 12px; color: var(--text-sub);">🎵 Music</span>
         <button type="button" class="audio-btn" id="audioToggleBtn" onclick="toggleAudio()">▶</button>
     </div>
 
     <div class="card">
         <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
 
-        <form id="birthdayForm" action="https://api.web3forms.com/submit" method="POST" target="hidden_iframe" onsubmit="handleFormSubmit()">
+        <form id="birthdayForm" action="https://api.web3forms.com/submit" method="POST" target="hidden_iframe" onsubmit="handleFormSubmit(event)">
             <!-- REPLACE 'YOUR_ACCESS_KEY_HERE' WITH YOUR WEB3FORMS KEY -->
             <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE">
             <input type="hidden" name="subject" value="New Birthday Response from BB Anne! 💕">
@@ -379,7 +378,7 @@
             <!-- Screen 5: Destination -->
             <div class="screen" id="screen5">
                 <p class="subtitle">Since we are always planning the next trip but no one knows where to go...</p>
-                <img class="feature-img" id="https://kommodo.ai/i/17fyfVcCOunfKqKdWvQt" alt="Penang Trip">
+                <img class="feature-img" id="penangImg" alt="Penang Trip">
                 <h2>The next trip we are going to is Penang! 📍</h2>
                 <p class="small-note">cause it's easier</p>
                 <button type="button" class="btn-primary" onclick="goToScreen(6)">Next ✨</button>
@@ -408,7 +407,7 @@
             <!-- Screen 7: Mood & Memory -->
             <div class="screen" id="screen7">
                 <h2>Thank u for ur time! ❤️</h2>
-                <p class="subtitle" style="margin-bottom: 10px;">Are u happy today?</p>
+                <p class="subtitle" style="margin-bottom: 8px;">Are u happy today?</p>
                 
                 <div class="emoji-scale">
                     <span class="emoji-item" onclick="selectEmoji(this, '😡 Angry')">😡</span>
@@ -418,7 +417,7 @@
                     <span class="emoji-item" onclick="selectEmoji(this, '😁 Super Happy')">😁</span>
                 </div>
 
-                <p class="subtitle" style="margin-bottom: 10px;">Ya it's easy as it's just like that... can u share ur memory with me? Because I wan us to share feelings with each other so we can keep up our friendship...</p>
+                <p class="subtitle" style="margin-bottom: 8px;">Ya it's easy as it's just like that... can u share ur memory with me? Because I wan us to share feelings with each other so we can keep up our friendship...</p>
                 <textarea name="user_memory_feeling" placeholder="Write a memory or feeling here..."></textarea>
 
                 <button type="button" class="btn-primary" onclick="goToScreen(8)">Next 💌</button>
@@ -445,13 +444,15 @@
                 <div class="emoji-top">✨</div>
                 <h2>Anyway, I really hope we can have some time where we can chill, stop talking, relax, and happily live our best life tgt...</h2>
                 <p class="subtitle">自然相处 like how we usually do.</p>
-                <h1 style="color: var(--btn-pink); margin: 20px 0;">Btw, I miss u ❤️</h1>
-                <button type="submit" class="btn-primary" id="sendLoveBtn">Send Love 💌</button>
+                <h2 style="color: var(--btn-pink); margin: 16px 0;">Btw, I miss u ❤️</h2>
+                <button type="button" class="btn-primary" id="sendLoveBtn" onclick="handleSendLoveClick()">Send Love 💌</button>
             </div>
         </form>
     </div>
 
     <script>
+        let hasSubmittedForm = false;
+
         window.addEventListener('DOMContentLoaded', () => {
             const penangImageBase64 = "data:image/jpeg;base64," + getPenangImageData();
             document.getElementById('penangImg').src = penangImageBase64;
@@ -464,8 +465,8 @@
 
         function triggerConfetti() {
             confetti({
-                particleCount: 100,
-                spread: 70,
+                particleCount: 120,
+                spread: 80,
                 origin: { y: 0.6 }
             });
 
@@ -482,7 +483,7 @@
                     spread: 55,
                     origin: { x: 1 }
                 });
-            }, 300);
+            }, 250);
         }
 
         /* Audio Toggle Logic */
@@ -519,7 +520,6 @@
             dodgeCount++;
             dodgeCounterText.textContent = `how many time u pressed no :( ${dodgeCount}`;
 
-            // Calculate bounding limits inside container
             const containerRect = dodgeArea.getBoundingClientRect();
             const btnRect = noBtn.getBoundingClientRect();
 
@@ -531,7 +531,6 @@
 
             noBtn.style.transform = `translate(${randomX}px, ${randomY}px)`;
 
-            // Make "Yes" grow slightly as she keeps attempting to click "No"
             yesScale += 0.1;
             yesBtn.style.transform = `scale(${yesScale})`;
         }
@@ -547,21 +546,28 @@
             document.getElementById('hiddenMoodInput').value = moodValue;
         }
 
-        /* Handle Form Submission: Confetti -> Pop-up Alert */
-        function handleFormSubmit() {
+        /* Send Love Click: Confetti on EVERY click + Form Submit + Alert Popup */
+        function handleSendLoveClick() {
+            // 1. Pop confetti every single time she clicks!
             triggerConfetti();
 
-            const btn = document.getElementById('sendLoveBtn');
-            btn.textContent = 'Sent with Love! 💕';
-            btn.disabled = true;
+            // 2. Submit form in background on first click
+            if (!hasSubmittedForm) {
+                document.getElementById('birthdayForm').submit();
+                hasSubmittedForm = true;
+            }
 
+            // 3. Update button text slightly
+            const btn = document.getElementById('sendLoveBtn');
+            btn.textContent = 'Sent with Love! 💕 (Click for more)';
+
+            // 4. Pop-up alert saying "i love you"
             setTimeout(() => {
                 alert("i love you");
-            }, 400);
+            }, 300);
         }
 
         function getPenangImageData() {
-            // Replace with your Base64 image string
             return "YOUR_IMAGE_BASE64_DATA";
         }
     </script>
