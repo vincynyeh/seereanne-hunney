@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday BB Anne!! 🎉</title>
+    <!-- Google Fonts for Editorial Aesthetic -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..700;1,400..700&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Canvas Confetti Library -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <style>
+        :root {
+            --bg-gradient: linear-gradient(135deg, #fff5f6 0%, #ffedf0 50%, #fce4e8 100%);
+            --btn-pink: #e06d88;
+            --btn-hover: #d05a76;
+            --text-main: #2c2224;
+            --text-sub: #7a686c;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: var(--bg-gradient);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow-x: hidden;
+            padding: 20px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.45);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            border-radius: 32px;
+            padding: 48px 36px;
+            width: 100%;
+            max-width: 580px;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(224, 109, 136, 0.08);
+            position: relative;
+            min-height: 480px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .screen {
+            display: none;
+            width: 100%;
+            animation: fadeIn 0.5s ease-in-out forwards;
+        }
+
+        .screen.active {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .emoji-top {
+            font-size: 56px;
+            margin-bottom: 20px;
+            line-height: 1;
+        }
+
+        h1, h2 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 500;
+            font-size: 38px;
+            line-height: 1.25;
+            color: var(--text-main);
+            margin-bottom: 16px;
+        }
+
+        p.subtitle {
+            font-size: 16px;
+            color: var(--text-sub);
+            line-height: 1.6;
+            margin-bottom: 28px;
+            font-weight: 400;
+        }
+
+        p.small-note {
+            font-size: 13px;
+            color: var(--text-sub);
+            margin-top: -10px;
+            margin-bottom: 24px;
+            font-style: italic;
+        }
+
+        /* Buttons */
+        .btn-primary {
+            background-color: var(--btn-pink);
+            color: #ffffff;
+            border: none;
+            padding: 14px 32px;
+            border-radius: 50px;
+            font-size: 15px;
+            font-weight: 500;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(224, 109, 136, 0.3);
+            transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--btn-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 24px rgba(224, 109, 136, 0.4);
+        }
+
+        .btn-secondary {
+            background-color: #ffffff;
+            color: var(--text-sub);
+            border: 1px solid #e5d8db;
+            padding: 12px 28px;
+            border-radius: 50px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--btn-pink);
+            color: var(--btn-pink);
+        }
+
+        /* Dodging Section */
+        .dodge-container {
+            position: relative;
+            width: 100%;
+            height: 140px;
+            margin-top: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #noBtn {
+            position: absolute;
+            transition: all 0.15s ease-out;
+            z-index: 10;
+        }
+
+        #hesitationText {
+            margin-top: 15px;
+            font-size: 14px;
+            color: var(--btn-pink);
+            font-weight: 500;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        #hesitationText.show {
+            opacity: 1;
+        }
+
+        /* Images */
+        .feature-img {
+            width: 100%;
+            max-width: 320px;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 16px;
+            margin: 15px 0;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.06);
+        }
+
+        /* Option Grid */
+        .options-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            width: 100%;
+            max-width: 340px;
+            margin-bottom: 24px;
+        }
+
+        .option-card {
+            background: #ffffff;
+            border: 2px solid #f0e2e5;
+            padding: 14px 20px;
+            border-radius: 16px;
+            cursor: pointer;
+            font-size: 15px;
+            color: var(--text-main);
+            transition: all 0.2s ease;
+            text-align: center;
+        }
+
+        .option-card:hover, .option-card.selected {
+            border-color: var(--btn-pink);
+            background: #fff8f9;
+            color: var(--btn-pink);
+            font-weight: 600;
+        }
+
+        /* Emoji Scale */
+        .emoji-scale {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            max-width: 320px;
+            margin: 15px 0 25px;
+        }
+
+        .emoji-item {
+            font-size: 32px;
+            cursor: pointer;
+            transition: transform 0.2s ease, filter 0.2s ease;
+            filter: grayscale(40%);
+        }
+
+        .emoji-item:hover, .emoji-item.selected {
+            transform: scale(1.3);
+            filter: grayscale(0%);
+        }
+
+        /* Textarea */
+        textarea {
+            width: 100%;
+            max-width: 380px;
+            height: 100px;
+            border-radius: 16px;
+            border: 1px solid #ebd3d7;
+            padding: 14px;
+            font-family: inherit;
+            font-size: 14px;
+            outline: none;
+            resize: none;
+            margin-bottom: 20px;
+            background: rgba(255, 255, 255, 0.8);
+        }
+
+        textarea:focus {
+            border-color: var(--btn-pink);
+            box-shadow: 0 0 0 3px rgba(224, 109, 136, 0.15);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        
+        <!-- Screen 1: Landing Page -->
+        <div class="screen active" id="screen1">
+            <div class="emoji-top">🎂</div>
+            <h1>Happy Birthday<br>BB Anne!! 🎉</h1>
+            <p class="subtitle">wishing u all the happiness today and always 🌸<br>u deserve every bit of it 💕</p>
+            <button class="btn-primary" onclick="goToScreen(2); triggerConfetti();">open ur gift 🎁</button>
+        </div>
+
+        <!-- Screen 2: Staycation Invite -->
+        <div class="screen" id="screen2">
+            <div class="emoji-top">🫰</div>
+            <h2>may i ask u out during your free time if possible? for staycation one or two days 🫰🫰</h2>
+            <p class="subtitle"></p>
+            <button class="btn-primary" onclick="goToScreen(3)">sure bish</button>
+        </div>
+
+        <!-- Screen 3: Appointment Check -->
+        <div class="screen" id="screen3">
+            <div class="emoji-top">📅</div>
+            <h2>Are you free to make an appointment?</h2>
+            <p class="subtitle">Im afraid that u r not free only to me 🙁</p>
+            <button class="btn-primary" onclick="goToScreen(4)">I'm free for u 🌸</button>
+        </div>
+
+        <!-- Screen 4: Dodging Question -->
+        <div class="screen" id="screen4">
+            <div class="emoji-top">🥺</div>
+            <h2>Are you willing?</h2>
+            <p class="subtitle">choose carefully hehe</p>
+            
+            <div class="dodge-container" id="dodgeArea">
+                <button class="btn-primary" id="yesBtn" onclick="goToScreen(5)">Yes 💖</button>
+                <button class="btn-secondary" id="noBtn">No</button>
+            </div>
+
+            <p id="hesitationText">我们的友情 还需要一秒的犹豫时间吗</p>
+        </div>
+
+        <!-- Screen 5: Destination (Penang) -->
+        <div class="screen" id="screen5">
+            <p class="subtitle">Since we are always planning the next trip but no one knows where to go, I will write it down now... 🌊</p>
+            <!-- Penang Image Placeholder -->
+            <img class="feature-img" src="https://images.unsplash.com/photo-1596422846543-75c6fc197f07?auto=format&fit=crop&w=600&q=80" alt="Penang">
+            <h2>The next trip we are going to is Penang! 📍</h2>
+            <p class="small-note">cause it's easier</p>
+            <button class="btn-primary" onclick="goToScreen(6)">Next ✨</button>
+        </div>
+
+        <!-- Screen 6: Date Picker -->
+        <div class="screen" id="screen6">
+            <div class="emoji-top">🥰</div>
+            <h2>I'm glad that u choose yes with sincerity! I think u are excited for ittt</h2>
+            <p class="subtitle">Let's pick a time in calendar 2026:</p>
+            
+            <div class="options-grid">
+                <div class="option-card" onclick="selectOption(this)">Option A: Sept / Oct 2026</div>
+                <div class="option-card" onclick="selectOption(this)">Option B: Nov / Dec 2026</div>
+                <div class="option-card" onclick="selectOption(this)">Option C: Flexible / Let's decide later</div>
+            </div>
+
+            <button class="btn-primary" onclick="goToScreen(7)">Confirm Date 📅</button>
+        </div>
+
+        <!-- Screen 7: Mood & Memory -->
+        <div class="screen" id="screen7">
+            <h2>Thank u for ur time! ❤️</h2>
+            <p class="subtitle" style="margin-bottom: 10px;">Are u happy today?</p>
+            
+            <div class="emoji-scale">
+                <span class="emoji-item" onclick="selectEmoji(this)">😡</span>
+                <span class="emoji-item" onclick="selectEmoji(this)">🙁</span>
+                <span class="emoji-item" onclick="selectEmoji(this)">😐</span>
+                <span class="emoji-item" onclick="selectEmoji(this)">😊</span>
+                <span class="emoji-item" onclick="selectEmoji(this)">😁</span>
+            </div>
+
+            <p class="subtitle" style="margin-bottom: 10px;">Ya it's easy as it's just like that... can u share ur memory with me? Because I wan us to share feelings with each other so we can keep up our friendship...</p>
+            <textarea placeholder="Write a memory or feeling here..."></textarea>
+
+            <button class="btn-primary" onclick="goToScreen(8)">Next 💌</button>
+        </div>
+
+        <!-- Screen 8: Heart-to-Heart Part 1 -->
+        <div class="screen" id="screen8">
+            <div class="emoji-top">💭</div>
+            <h2>I feel like we seldom catch up with each other and go out anymore...</h2>
+            <p class="subtitle">Idk, is it because smtg sad has been happening to me lately, so I feel like I'm a bit lonely...</p>
+            <button class="btn-primary" onclick="goToScreen(9)">Next 🤍</button>
+        </div>
+
+        <!-- Screen 9: Heart-to-Heart Part 2 -->
+        <div class="screen" id="screen9">
+            <div class="emoji-top">🫂</div>
+            <h2>And I noticed we have been really getting stranger, idk why... to each other</h2>
+            <p class="subtitle">but I wan to keep this friendship alive.</p>
+            <button class="btn-primary" onclick="goToScreen(10)">Next ✨</button>
+        </div>
+
+        <!-- Screen 10: Heart-to-Heart Part 3 & Final Message -->
+        <div class="screen" id="screen10">
+            <div class="emoji-top">✨</div>
+            <h2>Anyway, I really hope we can have some time where we can chill, stop talking, relax, and happily live our best life tgt...</h2>
+            <p class="subtitle">自然相处 like how we usually do.</p>
+            <h1 style="color: var(--btn-pink); margin: 20px 0;">Btw, I miss u ❤️</h1>
+            <button class="btn-primary" onclick="triggerConfetti(); alert('Sent with love! 💕');">Send Love 💌</button>
+        </div>
+
+    </div>
+
+    <script>
+        function goToScreen(screenNumber) {
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            document.getElementById('screen' + screenNumber).classList.add('active');
+        }
+
+        function triggerConfetti() {
+            confetti({
+                particleCount: 100,
+                spread: 70,
+                origin: { y: 0.6 }
+            });
+        }
+
+        /* Dodging "No" Button & Growing "Yes" Button Logic */
+        const noBtn = document.getElementById('noBtn');
+        const yesBtn = document.getElementById('yesBtn');
+        const dodgeArea = document.getElementById('dodgeArea');
+        const hesitationText = document.getElementById('hesitationText');
+        let yesScale = 1.0;
+        let hesitationTimer = null;
+
+        function dodgeNoButton() {
+            const containerRect = dodgeArea.getBoundingClientRect();
+            const btnRect = noBtn.getBoundingClientRect();
+
+            // Calculate safe boundaries
+            const maxX = (containerRect.width / 2) - (btnRect.width / 2) - 20;
+            const maxY = (containerRect.height / 2) - (btnRect.height / 2) - 10;
+
+            const randomX = (Math.random() * 2 - 1) * maxX;
+            const randomY = (Math.random() * 2 - 1) * maxY;
+
+            noBtn.style.transform = `translate(${randomX}px, ${randomY}px)`;
+
+            // Grow "Yes" button
+            yesScale += 0.15;
+            yesBtn.style.transform = `scale(${yesScale})`;
+
+            // Trigger delayed text after 1 second
+            if (!hesitationTimer) {
+                hesitationTimer = setTimeout(() => {
+                    hesitationText.classList.add('show');
+                }, 1000);
+            }
+        }
+
+        noBtn.addEventListener('mouseover', dodgeNoButton);
+        noBtn.addEventListener('click', dodgeNoButton);
+
+        /* Selection Helpers */
+        function selectOption(element) {
+            document.querySelectorAll('.option-card').forEach(c => c.classList.remove('selected'));
+            element.classList.add('selected');
+        }
+
+        function selectEmoji(element) {
+            document.querySelectorAll('.emoji-item').forEach(e => e.classList.remove('selected'));
+            element.classList.add('selected');
+        }
+    </script>
+</body>
+</html>
