@@ -450,14 +450,15 @@
         }
 
         function validateDatesAndProceed() {
-            const date1 = document.getElementById('firstChoiceDate').value;
-            const date2 = document.getElementById('secondChoiceDate').value;
-            if (!date1 || !date2) {
-                alert("oi select dates before proceeding ah u better dun rebel ah u fanguzai");
-                return;
-            }
-            goToScreen(7);
-        }
+    const date1 = document.getElementById('firstChoiceDate').value;
+    const date2 = document.getElementById('secondChoiceDate').value;
+    
+    if (!date1 || !date2) {
+        alert("oi select dates before proceeding ah u better dun rebel ah u fanguzai");
+        return;
+    }
+    goToScreen(7);
+}
 
         function triggerConfetti() {
             confetti({
